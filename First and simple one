@@ -1,0 +1,44 @@
+
+
+floor= int
+inputs = [0, 0, 1, 0, 0, 0, 1]
+weights = [0, 0, 0, 0, 0, 0, 0]
+desired_result = 1 #Желанный результат
+learning_rate = 0.2 #Скорость обучения
+trials = 6
+number=0
+
+
+
+def evaluate_neural_network(input_array, weight_array):  #Функция оценивания нейросети
+ #сoбирает входные значения и веса и рассчитывает значение на выходе
+    result = 0
+    for i in range(len(input_array)):
+        layer_value = input_array[i] * weight_array[i] # Значение слоя = входные данные умножить на Вес
+        result += layer_value  # Присвоить результату найденное значение слоя
+    print("evaluate_neural_network: " + str(result))
+    print("weights: " + str(weights))
+    return result
+
+  
+def evaluate_error(desired, actual): # Значение ошибки 
+    error = desired - actual         # Значение ошибки = желаемый результат - настоящий
+    print("evaluate_error: " + str(error))  
+    return error
+    
+def learn(input_array, weight_array):
+    print("learning...")
+    for i in range(len(input_array)):
+        if input_array[i] > 0:
+            weight_array[i] += learning_rate
+            
+def train(trials): 
+    for i in range(trials):
+        neural_net_result = evaluate_neural_network(inputs, weights)
+        learn(inputs, weights)
+
+    
+
+        
+train(trials)
+
